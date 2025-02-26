@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "732345322338",
+    "project_id": "l-sha-a",
+    "storage_bucket": "l-sha-a.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:732345322338:android:f7e9f29bad54f00f77ba3b",
+        "android_client_info": {
+          "package_name": "com.example.l_sha_a"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAODVzz8jUtqTnKUwqKxephnZTYpW6clgk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

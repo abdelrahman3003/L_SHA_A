@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:l_sha_a/controller/auth/signin_cubit.dart';
+import 'package:l_sha_a/controller/home/home_cubit.dart';
 import 'package:l_sha_a/core/app_route.dart';
+import 'package:l_sha_a/core/dialog.dart';
 import 'package:l_sha_a/view/auth/widget/signin_body.dart';
 
 class SigninView extends StatelessWidget {
@@ -9,7 +11,6 @@ class SigninView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final cubit = context.read<SigninCubit>();
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -19,40 +20,20 @@ class SigninView extends StatelessWidget {
             child: BlocListener<SigninCubit, SigninState>(
                 listener: (context, state) {
                   if (state is SigninFailedState) {
-                    showDialog(
-                      context: context,
-                      builder: (context) => AlertDialog(
-                        title: const Text("خطأ"),
-                        content: Text(state.errorMessage),
-                        actions: [
-                          TextButton(
-                            onPressed: () => Navigator.of(context).pop(),
-                            child: const Text("حسناً"),
-                          )
-                        ],
-                      ),
-                    );
+                    Navigator.pop(context);
+                    errorDialog(context, state.errorMessage);
                   }
                   if (state is SigninLoadingState) {
-                    showDialog(
-                      context: context,
-                      barrierDismissible: false,
-                      builder: (context) => const AlertDialog(
-                        content: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            CircularProgressIndicator(),
-                            SizedBox(width: 16),
-                            Text("جاري تسجيل الدخول..."),
-                          ],
-                        ),
-                      ),
-                    );
-                    Navigator.of(context).pop();
+                    loadingDialog(context);
                   }
                   if (state is SigninSuccessState) {
-                    Navigator.of(context)
-                        .pushReplacementNamed(AppRoutes.homeView);
+                    Navigator.pop(context);
+                    context.read<HomeCubit>().email =
+                        context.read<SigninCubit>().emailController.text;
+                    Navigator.of(context).pushReplacementNamed(
+                        AppRoutes.homeView,
+                        arguments:
+                            context.read<SigninCubit>().emailController.text);
                   }
                 },
                 child: SigninBody()),

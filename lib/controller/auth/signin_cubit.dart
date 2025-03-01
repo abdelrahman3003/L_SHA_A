@@ -14,14 +14,15 @@ class SigninCubit extends Cubit<SigninState> {
   final FirebaseAuth auth = FirebaseAuth.instance;
   UserCredential? userCredential;
   String? errorMessage;
+  String? errorLogMessage;
 
   late TextEditingController emailController;
   late TextEditingController passwordController;
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   inilaData() {
-    emailController = TextEditingController(text: "abdo@gmail.com");
-    passwordController = TextEditingController(text: "123456");
+    emailController = TextEditingController();
+    passwordController = TextEditingController();
   }
 
   Future<void> signInWithEmail() async {
@@ -32,6 +33,10 @@ class SigninCubit extends Cubit<SigninState> {
     } on FirebaseAuthException catch (e) {
       log("FirebaseAuthException: ${e.code}");
       switch (e.code) {
+        case 'network-request-failed':
+          errorMessage =
+              "لا يوجد اتصال بالإنترنت. يرجى التحقق من الشبكة والمحاولة مرة أخرى";
+          break;
         case 'invalid-credential':
           errorMessage = "البريد الإلكتروني أو كلمة المرور غير صحيحة";
           break;
@@ -45,19 +50,18 @@ class SigninCubit extends Cubit<SigninState> {
           errorMessage = "كلمة المرور غير صحيحة";
           break;
         default:
-          errorMessage = e.message ?? "حدث خطأ غير متوقع. حاول مرة أخرى.";
+          errorMessage = e.message ?? "حدث خطأ غير متوقع. حاول مرة أخرى";
           break;
       }
     } catch (e) {
       log("Unknown exception: $e");
-      errorMessage = "حدث خطأ غير متوقع. حاول مرة أخرى.";
+      errorMessage = "حدث خطأ غير متوقع. حاول مرة أخرى";
     }
   }
 
   Future<void> emitSignInStates() async {
     if (formKey.currentState!.validate()) {
       emit(SigninLoadingState());
-
       await signInWithEmail();
       if (userCredential != null) {
         emit(SigninSuccessState());

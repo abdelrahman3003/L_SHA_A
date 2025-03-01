@@ -30,9 +30,18 @@ class AppTextform extends StatelessWidget {
           fillColor: AppColors.primary,
           filled: true,
           border: InputBorder.none,
+          enabledBorder: OutlineInputBorder(
+            borderSide: BorderSide.none,
+            borderRadius: BorderRadius.circular(8),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide.none,
+            borderRadius: BorderRadius.circular(8),
+          ),
           hintText: hint,
           hintStyle: AppStyles.font18WhiteLightRegular,
           prefixIcon: Icon(icon, color: AppColors.white),
+          contentPadding: EdgeInsets.symmetric(vertical: 12, horizontal: 16),
           errorStyle: const TextStyle(
             color: Colors.red,
             fontSize: 14,

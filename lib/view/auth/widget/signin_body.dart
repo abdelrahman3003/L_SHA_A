@@ -16,7 +16,7 @@ class SigninBody extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Image.asset("assset/images/logo.png", height: 250.h, width: 250.w),
+          Image.asset("assset/images/logo2.jpeg", height: 250.h, width: 250.w),
           SizedBox(height: 60),
           AppTextform(
             hint: "البريد الاكتروني",

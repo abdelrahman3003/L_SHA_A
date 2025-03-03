@@ -34,8 +34,10 @@ class DepartmentView extends StatelessWidget {
                     ),
                     leading: const Icon(Icons.book, color: Colors.blue),
                     onTap: () {
-                      cubit.launchPdf(DepartmentData
-                          .departmenstList[index].subjects[index].pdfUrl);
+                      if (index == 0 || index == 1) {
+                        cubit.launchPdf(DepartmentData
+                            .departmenstList[index].subjects[index].pdfUrl);
+                      }
                     },
                   ),
                 );

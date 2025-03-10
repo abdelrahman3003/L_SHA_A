@@ -10,7 +10,7 @@ class HomeCubit extends Cubit<HomeState> {
 //  DepartmentData departmentData = DepartmentData();
   String? email;
   List<String> departmentNames = [
-    "علوم حساب",
+    'علوم حساب',
     "نظم المعلومات",
     "المجالات",
     "الادارة والماحسبة",
@@ -18,7 +18,8 @@ class HomeCubit extends Cubit<HomeState> {
     "المقالات"
   ];
   String? errorLogMessage;
-
+  String? cuurentDepartment;
+  String? cuurentMaterila;
   selectDepartment(String text, BuildContext context) {
     Navigator.pushNamed(context, AppRoutes.departmentView);
   }

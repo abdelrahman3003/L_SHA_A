@@ -3,18 +3,21 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:l_sha_a/controller/auth/signin_cubit.dart';
 import 'package:l_sha_a/controller/department/department_cubit.dart';
 import 'package:l_sha_a/controller/home/home_cubit.dart';
+import 'package:l_sha_a/controller/material/material_cubit.dart';
 import 'package:l_sha_a/view/auth/signin_view.dart';
-import 'package:l_sha_a/view/home/department_view.dart';
-import 'package:l_sha_a/view/home/home_view.dart';
+import 'package:l_sha_a/view/home/department/department_view.dart';
+import 'package:l_sha_a/view/home/home/home_view.dart';
+import 'package:l_sha_a/view/home/material/material_view.dart';
 
 class AppRoutes {
   static const String singinView = '/singinView';
   static const String homeView = '/homepage';
   static const String departmentView = '/departmentView';
+  static const String materialView = '/materialView';
   static final homeCubit = HomeCubit();
   static Route generateRoute(RouteSettings setting) {
     switch (setting.name) {
-      case "/" || singinView:
+      case "/":
         return MaterialPageRoute(
           builder: (context) => MultiBlocProvider(
             providers: [
@@ -33,14 +36,19 @@ class AppRoutes {
           ),
         );
       case departmentView:
-        final int departmentName = setting.arguments as int;
         return MaterialPageRoute(
             builder: (context) => MultiBlocProvider(
                   providers: [
                     BlocProvider.value(value: homeCubit),
                     BlocProvider(create: (context) => DepartmentCubit()),
                   ],
-                  child: DepartmentView(departmentIndex: departmentName),
+                  child: DepartmentView(),
+                ));
+      case materialView:
+        return MaterialPageRoute(
+            builder: (context) => BlocProvider(
+                  create: (context) => MaterialCubit(),
+                  child: MaterialView(),
                 ));
 
       default:

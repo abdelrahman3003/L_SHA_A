@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:l_sha_a/view/home/widget/department_widget.dart';
+import 'package:l_sha_a/data/repo/department_data.dart';
+import 'package:l_sha_a/view/home/home/widget/department_widget.dart';
 
 class AllDepartment extends StatelessWidget {
   const AllDepartment({super.key});
@@ -11,7 +12,7 @@ class AllDepartment extends StatelessWidget {
         child: GridView.builder(
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2, crossAxisSpacing: 16, mainAxisSpacing: 16),
-          itemCount: 6,
+          itemCount: DepartmentData.departmentNames.length,
           itemBuilder: (context, index) =>
               DepartmentWidget(departmentIndex: index),
         ));

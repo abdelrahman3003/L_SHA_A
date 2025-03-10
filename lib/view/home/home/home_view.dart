@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:l_sha_a/controller/home/home_cubit.dart';
 import 'package:l_sha_a/data/repo/department_data.dart';
-import 'package:l_sha_a/view/home/widget/department_widget.dart';
-import 'package:l_sha_a/view/home/widget/home_widget.dart';
+import 'package:l_sha_a/view/home/home/widget/department_widget.dart';
+import 'package:l_sha_a/view/home/home/widget/home_widget.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({

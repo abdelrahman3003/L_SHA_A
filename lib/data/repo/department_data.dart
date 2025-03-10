@@ -1,6 +1,14 @@
 import 'package:l_sha_a/data/models/department_model.dart';
 
 class DepartmentData {
+  static List<String> departmentNames = [
+    'علوم حساب',
+    'نظم المعلومات',
+    'المجالات',
+    'الادارة والماحسبة',
+    'كل الاقسام',
+    'نظم التشغيل',
+  ];
   static List<Department> departmenstList = [
     Department(name: "نظم المعلومات", subjects: [
       Subject(

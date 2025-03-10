@@ -21,8 +21,8 @@ class SigninCubit extends Cubit<SigninState> {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   inilaData() {
-    emailController = TextEditingController();
-    passwordController = TextEditingController();
+    emailController = TextEditingController(text: "abdo@gmail.com");
+    passwordController = TextEditingController(text: "123456");
   }
 
   Future<void> signInWithEmail() async {

@@ -10,7 +10,7 @@ class HomeCubit extends Cubit<HomeState> {
 //  DepartmentData departmentData = DepartmentData();
   String? email;
   List<String> departmentNames = [
-    'علوم حساب',
+    "علوم حاسب",
     "نظم المعلومات",
     "المجالات",
     "الادارة والماحسبة",

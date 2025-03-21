@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:bloc/bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:l_sha_a/core/constatnt.dart';
+import 'package:l_sha_a/data/models/material_data.dart';
 import 'package:l_sha_a/data/models/material_model.dart';
 import 'package:meta/meta.dart';
 
@@ -11,15 +12,44 @@ part 'department_state.dart';
 class DepartmentCubit extends Cubit<DepartmentState> {
   DepartmentCubit() : super(DepartmentInitial()) {
     emitGetMaterialStates();
-    // String materialName = MaterialData.materials[3].keys.first;
-    // List<Book> materialBooks = MaterialData.materials[3][materialName]!;
+    // deleteCollection("departments");
+    // String materialName = MaterialData.materials1[0].keys.first;
+    // List<Book> materialBooks = MaterialData.materials1[0][materialName]!;
     // addSubjectWithBooks(
     //     departmentId: "نظم المعلومات",
     //     materialName: materialName,
     //     bookList: materialBooks);
+    //   addDepartments(MaterialData.materials1);
   }
 
   List<String>? materials;
+  addDepartments(List<Map<String, List<Book>>> materials) {
+    for (var i = 0; i < materials.length; i++) {
+      String materialName = MaterialData.materials1[i].keys.first;
+      List<Book> materialBooks = MaterialData.materials1[i][materialName]!;
+      addSubjectWithBooks(
+          departmentId: "الادارة والماحسبة",
+          materialName: materialName,
+          bookList: materialBooks);
+    }
+  }
+
+  Future<void> deleteCollection(String collectionPath) async {
+    var collection = FirebaseFirestore.instance.collection(collectionPath);
+    var snapshots = await collection.get();
+
+    for (var doc in snapshots.docs) {
+      await doc.reference.delete();
+    }
+
+    print("✅ تم حذف جميع البيانات من المجموعة: $collectionPath");
+  }
+
+// استخدام الدالة
+  void main() async {
+    await deleteCollection(
+        "اسم_المجموعة"); // غيّر "اسم_المجموعة" إلى اسم الكولكشن
+  }
 
   getMaterialsInDepartment(String departmentId) async {
     try {

@@ -21,9 +21,8 @@ class HomeView extends StatelessWidget {
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2, crossAxisSpacing: 16, mainAxisSpacing: 16),
               itemCount: DepartmentData.departmenstList.length,
-              itemBuilder: (context, index) => DepartmentWidget(
-                departmentIndex: index,
-              ),
+              itemBuilder: (context, index) =>
+                  DepartmentWidget(departmentIndex: index),
             )));
   }
 }
